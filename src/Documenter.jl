@@ -432,7 +432,7 @@ function deploydocs(;
                 # The upstream URL to which we push new content and the ssh decryption commands.
                 write(keyfile, String(base64decode(documenter_key)))
                 chmod(keyfile, 0o600)
-                upstream = "git@$(replace(repo, "github.com/", "github.com:"))"
+                upstream = "git@$(replace(repo, "github.com/" => "github.com:"))"
 
                 # Use a custom SSH config file to avoid overwriting the default user config.
                 withfile(joinpath(homedir(), ".ssh", "config"),
