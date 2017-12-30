@@ -17,6 +17,7 @@ Represents the output format. Possible values are `Markdown`, `LaTeX`, and `HTML
     Markdown,
     LaTeX,
     HTML,
+    Algolia,
 )
 
 """
@@ -28,6 +29,7 @@ function mimetype(f::Symbol)
     f ≡ :markdown ? MIME"text/plain"() :
     f ≡ :latex    ? MIME"text/latex"() :
     f ≡ :html     ? MIME"text/html"()  :
+    f ≡ :algolia  ? MIME"text/json"()  :
         error("unexpected format.")
 end
 
@@ -40,6 +42,7 @@ function extension(f::Symbol)
     f ≡ :markdown ? ".md"   :
     f ≡ :latex    ? ".tex"  :
     f ≡ :html     ? ".html" :
+    f ≡ :algolia  ? ".json" :
         error("unexpected format.")
 end
 

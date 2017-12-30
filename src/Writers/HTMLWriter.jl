@@ -546,6 +546,7 @@ end
 function jsonescape(s)
     s = replace(s, '\\', "\\\\")
     s = replace(s, '\n', "\\n")
+    s = replace(s, '\t', "\\t")
     replace(s, '"', "\\\"")
 end
 

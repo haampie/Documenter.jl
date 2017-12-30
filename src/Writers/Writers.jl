@@ -30,18 +30,22 @@ abstract type FormatSelector <: Selectors.AbstractSelector end
 abstract type MarkdownFormat <: FormatSelector end
 abstract type LaTeXFormat    <: FormatSelector end
 abstract type HTMLFormat     <: FormatSelector end
+abstract type AlgoliaFormat  <: FormatSelector end
 
 Selectors.order(::Type{MarkdownFormat}) = 1.0
 Selectors.order(::Type{LaTeXFormat})    = 2.0
 Selectors.order(::Type{HTMLFormat})     = 3.0
+Selectors.order(::Type{AlgoliaFormat})  = 4.0
 
 Selectors.matcher(::Type{MarkdownFormat}, fmt, _) = fmt === :markdown
 Selectors.matcher(::Type{LaTeXFormat},    fmt, _) = fmt === :latex
 Selectors.matcher(::Type{HTMLFormat},     fmt, _) = fmt === :html
+Selectors.matcher(::Type{AlgoliaFormat},  fmt, _) = fmt === :algolia
 
 Selectors.runner(::Type{MarkdownFormat}, _, doc) = MarkdownWriter.render(doc)
 Selectors.runner(::Type{LaTeXFormat},    _, doc) = LaTeXWriter.render(doc)
 Selectors.runner(::Type{HTMLFormat},     _, doc) = HTMLWriter.render(doc)
+Selectors.runner(::Type{AlgoliaFormat},  _, doc) = AlgoliaWriter.render(doc)
 
 """
 Writes a [`Documents.Document`](@ref) object to `.user.build` directory in
@@ -74,5 +78,6 @@ end
 include("MarkdownWriter.jl")
 include("HTMLWriter.jl")
 include("LaTeXWriter.jl")
+include("AlgoliaWriter.jl")
 
 end
